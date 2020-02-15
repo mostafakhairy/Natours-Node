@@ -13,6 +13,7 @@ const app = express();
 const hpp = require('hpp');
 
 console.log(process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
