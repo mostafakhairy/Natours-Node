@@ -7,6 +7,7 @@ const globalErrorHandler = require('./src/filters/global-error-handler');
 const AppError = require('./src/helper/app.error');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const compression = require('compression');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const app = express();
@@ -50,6 +51,9 @@ app.use(
     whitelist: ['duration', 'price', 'durationWeeks'] // allow some fields for double sort
   })
 );
+
+// compress all string that return from apis
+app.use(compression());
 
 // to server static html
 app.use(express.static(`${__dirname}/public`));
