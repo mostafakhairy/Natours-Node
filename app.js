@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 const limiter = new rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
-  message: 'only limit requests allowed during this time'
+  message: 'only limit requests allowed during this time',
 });
 app.use('/api', limiter);
 
@@ -48,7 +48,7 @@ app.use(xss());
 //prevent http paramter pollution like use $sort = field1 & $sort = field2
 app.use(
   hpp({
-    whitelist: ['duration', 'price', 'durationWeeks'] // allow some fields for double sort
+    whitelist: ['duration', 'price', 'durationWeeks'], // allow some fields for double sort
   })
 );
 
@@ -77,4 +77,5 @@ app.all('*', (req, res, next) => {
 // using middleware for error handling when we use callback function with
 //4 params express will assume that its this middleware is global error handler
 app.use(globalErrorHandler);
+
 module.exports = app;
